@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <link rel="stylesheet" href="{% static 'css/bookadmin.css' %}">
+</head>
+<body>
+    <h1>Books Details</h1>
+    <button><a href="{% url 'bookdetails' %}">Add Book</a></button>
+    <table>
+        <tr>
+            <th>Book Name</th>
+            <th>Book Code</th>
+            <th>Author Name</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Amount</th>
+            <th>Created Date</th>
+            <th>Updated Date</th>
+            <th>Action</th>
+            <th>Remove</th>
+        </tr>
+        {% for i in obj %}
+        <tr>
+            <td>{{i.Book_Name}}</td>
+            <td>{{i.Book_code}}</td>
+            <td>{{i.Author_Name}}</td>
+            <td>{{i.Date}}</td>
+            <td>{{i.Status}}</td>
+            <td>{{i.Book_Amount}}</td>
+            <td>{{i.Created_Date}}</td>
+            <td>{{i.Updated_Date}}</td>
+            <td><button><a href="{% url 'updatebook' i.id %}">Edit</a></button></td>
+            <td><button><a href="{% url 'deletebook' i.id %}">Delete</a></button></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

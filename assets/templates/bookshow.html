@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <link rel="stylesheet" href="{% static 'css/bookshow.css' %}">
+</head>
+
+<body>
+    <h1>Books Details</h1>
+    <h1 style="float: right; color: blue;">Welcome {{name}}! </h1>
+    <form action="" name="booksearch" method="post">
+        {% csrf_token %}
+        <label for="search">Book Name</label>
+        <input type="text" name="searchbook">&nbsp
+        <button type="submit">Search</button>
+    </form>
+    <table>
+        <tr>
+            <th>Book Name</th>
+            <th>Book Code</th>
+            <th>Author Name</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Amount</th>
+            <th>Book Image</th>
+            <th>Created Date</th>
+            <th>Updated Date</th>
+            <th>Action</th>
+            <th>Remove</th>
+        </tr>
+        {% for i in obj %}
+        <tr>
+            <td>{{i.Book_Name}}</td>
+            <td>{{i.Book_code}}</td>
+            <td>{{i.Author_Name}}</td>
+            <td>{{i.Date}}</td>
+            <td>{{i.Status}}</td>
+            <td>{{i.Book_Amount}}</td>
+            <td><img src="{{i.Book_Img.url}}" style="width:100px;height:100px;"></td>
+            <td>{{i.Created_Date}}</td>
+            <td>{{i.Updated_Date}}</td>
+            <td><button><a href="{% url 'takebook' i.id%}">Take</a></button></td>
+            <td><button><a href="{% url 'returnbook'  i.id%}">Return</a></button></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
